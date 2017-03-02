@@ -48,8 +48,8 @@
 	<?php endif ?>
 
 	<meta itemprop="description" content="<?= $site->description()->html() ?>">
-	<!-- <link rel="shortcut icon" href="<?php //url('assets/images/favicon.ico') ?>">
-	<link rel="icon" href="<?php //url('assets/images/favicon.ico') ?>" type="image/x-icon"> -->
+	<link rel="shortcut icon" href="">
+	<link rel="icon" href="" type="image/x-icon">
 
 	<?php 
 	echo css('assets/css/build/build.min.css');
@@ -66,7 +66,15 @@
 	<?php endif ?>
 
 </head>
-<body>
+<body
+<?php $template = $page->template()  ?>
+<?php e($page->isHomepage(), " class='home'") ?>
+<?php e($template == "cart", " class='shop'") ?>
+<?php e($template == "default", " class='page'") ?>
+<?php e($template == "products", " class='shop products'") ?>
+<?php e($template == "product", " class='shop'") ?>
+<?php e($template == "project", " class='project'") ?>
+>
 
 <div id="outdated">
 	<div class="inner">
@@ -78,7 +86,41 @@
 <div class="loader">
 	<div class="spinner">
 		<svg class="circular" viewBox="25 25 50 50">
-		<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="1" stroke-miterlimit="10"></circle>
+		<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"></circle>
 		</svg>
 	</div>
 </div>
+
+<?php
+
+// main menu items
+$items = $pages->visible();
+
+// only show the menu if items are available
+if($items->count()):
+
+?>
+<nav id="main-menu" class="menu">
+  <a<?php e($site->homePage()->isOpen(), ' class="active"') ?> href="<?php echo $site->url() ?>"><h1><?= $site->title()->html() ?></h1></a>
+  <ul>
+    <?php foreach($items as $item): ?>
+    <?php if($item->showinmenu()->bool()): ?>
+    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?php echo $item->url() ?>"><?php echo $item->title()->html() ?></a></li>
+    <?php endif ?>
+    <?php endforeach ?>
+    <?php if($site->pdf()->isNotEmpty()): ?>
+    <li><a href="<?= $site->pdf()->toFile()->url() ?>" target='_blank' download>pdf</a></li>
+	<?php endif ?>
+  </ul>
+</nav>
+
+<?php endif ?>
+
+<nav id="shop-menu" class="menu">
+  <?php $shop = $pages->find('shop') ?>
+  <a<?php e($shop->isOpen(), ' class="active"') ?> href="<?php echo $shop->url() ?>"><h1><?= $shop->title()->html() ?></h1></a>
+  <!-- <ul>
+  	<?php $cart = $pages->find('cart') ?>
+    <li><a<?php e($cart->isOpen(), ' class="active"') ?> href="<?php echo $cart->url() ?>"><?php echo $cart->title()->html() ?></a></li>
+  </ul> -->
+</nav>

@@ -8,10 +8,9 @@ fields:
     label: Title
     type:  text
     width: 3/4
-  showinmenu:
-      label: In menu
-      type: toggle
-      default: yes
+  featured:
+      label: Featured
+      type: image
       width: 1/4
   text:
     label: Text

@@ -2,10 +2,10 @@
 
 <div id="container">
 
-<div class="inner page">
+<div class="inner">
 
 <?php if($page->text()->isNotEmpty()): ?>
-<section>
+<section class="error">
 	<?= $page->text()->kt() ?>
 </section>
 <?php endif ?>

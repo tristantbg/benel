@@ -35,10 +35,14 @@ body
 	font-smoothing()
 	font-family 'NM', 'Helvetica', 'Arial', sans-serif
 	font-size 3vh
+	+below($md)
+		font-size 2vh
 
 h1
 	text-transform uppercase
 	font-size 5vh
+	+below($md)
+		font-size 3vh
 
 p
 	margin-bottom 1em
@@ -159,6 +163,14 @@ a, a:hover, a:visited, a:focus
 				stroke-dashoffset 0
 				animation dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite
 
+.credits
+	position fixed
+	transform(translateX(90%) rotate(-90deg))
+	transform-origin left
+	bottom 2vh
+	right 2vh
+	font-size .6em
+
 .menu
 	mix-blend-mode difference
 	color $primary
@@ -170,7 +182,7 @@ a, a:hover, a:visited, a:focus
 		display none
 	li
 		text-transform lowercase
-	a:hover h1:after, a.active h1:after
+	h1:hover::after, h1.active::after
 		content ''
 		width 100%
 		height .08em
@@ -185,6 +197,9 @@ a, a:hover, a:visited, a:focus
 	left $padding
 	z-index 100
 
+#shop-link-l
+	display none
+
 #shop-menu
 	text-align right
 	position fixed
@@ -195,9 +210,6 @@ a, a:hover, a:visited, a:focus
 #container
 	min-height 100vh
 	background $primary
-	
-.owl-carousel .owl-item img
-	width auto
 
 .inner.project
 	#slide-caption
@@ -206,6 +218,8 @@ a, a:hover, a:visited, a:focus
 		left $padding
 		z-index 100
 		font-size 4vh
+		+below($md)
+			font-size 2vh
 		p
 			display inline
 
@@ -217,6 +231,9 @@ a, a:hover, a:visited, a:focus
 		height 100%
 	.content-item
 		height 100%
+	.video-item
+		+below($md)
+			display none
 
 .inner.home
 	height 100vh
@@ -225,26 +242,45 @@ a, a:hover, a:visited, a:focus
 
 .inner.page
 	padding 15vh 4vh 0
+	img
+		max-width 100%
+	+above($md + 1)
+		span(1/2)
+		padding-right none
 
 .inner.product
 	.col
 		span(1/2)
 		height 100vh
 		overflow hidden
+		+below($md)
+			stack()
+			overflow initial
+			height auto
 		img
 			width auto
 			max-width 100%
 			max-height 100%
+			+below($md)
+				width 100%
+				height auto
 	.infos
 		position relative
-		padding $padding ($padding*5) $padding $padding
+		padding $padding ($padding*3) $padding $padding
 		border-left .18em solid
+		+below($md)
+			border none
+			padding-left $padding
+			padding-bottom 20vh
 		.text
 			margin-bottom 2em
 		.meta.cf
 			font-size 5vh
+			+below($md)
+				font-size 3vh
 			li
 				display inline-block
+			li:first-child
 				margin-right 3em
 		.nextprev
 			position absolute
@@ -271,7 +307,10 @@ body.page, body.project
 			background $primary
 
 body.shop
+	#shop-link-l
+		display inline-block
 	#shop-menu
+		display none
 		h1::after
 			content ''
 			width 100%
@@ -280,6 +319,57 @@ body.shop
 			bottom -1vh
 			left 0
 			background $primary
+	.products
+		.page-content
+			//padding 15vh 30%
+			.content-item
+				span(1/3)
+				+below($md)
+					stack()
+				img
+					display block
+					width 100%
+					height auto
+				.item-caption
+					height 8%
+					form
+						display block
+						height 100%
+					.flex
+						display block
+						height 100%
+						button
+							cursor pointer
+							span(1)
+							height 100%
+							border none
+							border .1em solid
+							border-right none
+							text-align center
+						button:nth-of-type(2)
+							display none
+			.content-item:last-child
+				.item-caption
+					.flex
+						button
+							border-right .1em solid
+			.content-item:nth-child(3n+1)
+				.item-caption
+					.flex
+						button
+							border-left none
+			.content-item:nth-child(3n)
+				.item-caption
+					.flex
+						button
+							border-right none
+			.content-item:hover
+				.item-caption
+					.flex
+						button:nth-of-type(1)
+							display none
+						button:nth-of-type(2)
+							display block
 	.slider
 		height 100vh
 		//padding-top 13vh
@@ -309,7 +399,7 @@ body.shop
 			display block
 	.btn.add, .btn.remove
 		cursor pointer
-		border .08em solid
+		border .1em solid
 		border-radius 100%
 		height 4vh
 		width 4vh
@@ -330,9 +420,11 @@ body.shop
 		font-size 5vh
 		margin-top 1em
 		text-align right
+		+below($md)
+			font-size 3vh
 	button
 		border .08em solid $secondary
 		background transparent
 
-body.project, body.products
+body.project
 	overflow hidden

@@ -4,10 +4,14 @@ title: Project
 files: true
 pages: false
 files:
+  sortable: true
   fields:
     caption:
       label: Caption
       type: textarea
+      validate: 
+        minLength: 0
+        maxLength: 90
 fields:
   prevnext: prevnext
   title:
@@ -25,7 +29,12 @@ fields:
     width: 1/4
   medias: 
     label: Images
-    type: gallery
+    type: selector
+    mode: multiple
+    sort: sort
+    types:
+      - image
+      - video
   text:
     label: Description
     type: textarea

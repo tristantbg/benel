@@ -62,23 +62,23 @@ function cart_count($cart) {
 function cart_postage($total) {
     $postage;
     switch ($total) {
-        case ($total < 10):
-            $postage = 2.5;
-            break;
-        case ($total < 30):
-            $postage = 5.5;
-            break;
-        case ($total < 75):
+        case ($total < 15):
             $postage = 8;
             break;
-        case ($total < 150):
-            $postage = 11.56;
+        case ($total < 30):
+            $postage = 12;
+            break;
+        case ($total < 60):
+            $postage = 20;
+            break;
+        case ($total < 100):
+            $postage = 30;
             break;
         case ($total < 300):
-            $postage = 28.30;
+            $postage = 40;
             break;
         default:
-            $postage = 40.75;
+            $postage = 50;
     }
     return $postage;
 }

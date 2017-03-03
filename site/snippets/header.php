@@ -95,13 +95,21 @@
 
 // main menu items
 $items = $pages->visible();
+$shop = $pages->find('shop');
 
 // only show the menu if items are available
 if($items->count()):
 
 ?>
 <nav id="main-menu" class="menu">
-  <a<?php e($site->homePage()->isOpen(), ' class="active"') ?> href="<?php echo $site->url() ?>"><h1><?= $site->title()->html() ?></h1></a>
+  <a href="<?php echo $site->url() ?>">
+  <h1<?php e($site->homePage()->isOpen(), ' class="active"') ?>><?= $site->title()->html() ?></h1>
+  </a>
+  <?php if($shop->isOpen()): ?>
+  <a href="<?php echo $shop->url() ?>">
+  <h1 id="shop-link-l"<?php e($shop->isOpen(), ' class="active"') ?>><?= $shop->title()->html() ?></h1>
+  </a>
+  <?php endif ?>
   <ul>
     <?php foreach($items as $item): ?>
     <?php if($item->showinmenu()->bool()): ?>
@@ -117,8 +125,8 @@ if($items->count()):
 <?php endif ?>
 
 <nav id="shop-menu" class="menu">
-  <?php $shop = $pages->find('shop') ?>
-  <a<?php e($shop->isOpen(), ' class="active"') ?> href="<?php echo $shop->url() ?>"><h1><?= $shop->title()->html() ?></h1></a>
+  
+  <a href="<?php echo $shop->url() ?>"><h1 id="shop-link-r"><?= $shop->title()->html() ?></h1></a>
   <!-- <ul>
   	<?php $cart = $pages->find('cart') ?>
     <li><a<?php e($cart->isOpen(), ' class="active"') ?> href="<?php echo $cart->url() ?>"><?php echo $cart->title()->html() ?></a></li>

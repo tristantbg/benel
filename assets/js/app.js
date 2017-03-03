@@ -38,7 +38,7 @@ $(function() {
             $slider = $('.slider').flickity({
                 cellSelector: '.content-item',
                 imagesLoaded: false,
-                lazyLoad: 4,
+                lazyLoad: 3,
                 cellAlign: 'left',
                 setGallerySize: false,
                 percentPosition: false,
@@ -63,8 +63,17 @@ $(function() {
                     if (typeof slidecaption !== typeof undefined && slidecaption !== false) {
                         $caption.html(pad(flkty.selectedIndex + 1) + "/" + nbCells + "&nbsp;&nbsp;" + slidecaption);
                     }
+                    $(flkty.selectedElement).find('video').each(function(i, video) {
+                        video.play();
+                    });
                 }
             });
+            var videos = document.getElementsByTagName('video');
+            for (var i = videos.length - 1; i >= 0; i--) {
+                videos[i].addEventListener('loadeddata', function() {
+                    $slider.flickity('resize');
+                }, false);
+            }
             $slider.on('staticClick.flickity', function(event, pointer, cellElement, cellIndex) {
                 if (!cellElement || $body.hasClass('shop')) {
                     return;

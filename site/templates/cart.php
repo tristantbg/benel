@@ -4,13 +4,14 @@
 
 <div id="container">
 
-<div class="inner page">
+<div class="inner page cart">
 
 <?php if(count($cart) == 0): ?>
 
 <main id="cart" class="main black" role="main">
 	<div class="text">
 		<h1>The cart is empty.</h1>
+		<br>
 		<a class="btn-white" href="<?php echo url('shop') ?>">See products</a>
 	</div>
 </main>

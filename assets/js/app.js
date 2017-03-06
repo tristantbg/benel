@@ -9,6 +9,7 @@ $(function() {
             $(window).resize(function(event) {});
             $(document).ready(function($) {
                 $body = $('body');
+                app.sizeSet();
                 app.loadSlider();
                 $(document).keyup(function(e) {
                     //esc
@@ -68,11 +69,15 @@ $(function() {
                     });
                 }
             });
-            var videos = document.getElementsByTagName('video');
-            for (var i = videos.length - 1; i >= 0; i--) {
-                videos[i].addEventListener('loadeddata', function() {
-                    $slider.flickity('resize');
-                }, false);
+            if (isMobile) {
+                $('.video-item').remove();
+            } else {
+                var videos = document.getElementsByTagName('video');
+                for (var i = videos.length - 1; i >= 0; i--) {
+                    videos[i].addEventListener('loadeddata', function() {
+                        $slider.flickity('resize');
+                    }, false);
+                }
             }
             $slider.on('staticClick.flickity', function(event, pointer, cellElement, cellIndex) {
                 if (!cellElement || $body.hasClass('shop')) {

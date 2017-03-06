@@ -67,7 +67,7 @@
 
 </head>
 <body
-<?php $template = $page->template()  ?>
+<?php $template = $page->template(); ?>
 <?php e($page->isHomepage(), " class='home'") ?>
 <?php e($template == "cart", " class='shop'") ?>
 <?php e($template == "default", " class='page'") ?>
@@ -105,9 +105,9 @@ if($items->count()):
   <a href="<?php echo $site->url() ?>">
   <h1<?php e($site->homePage()->isOpen(), ' class="active"') ?>><?= $site->title()->html() ?></h1>
   </a>
-  <?php if($shop->isOpen()): ?>
+  <?php if($template == 'shop' || $template == 'products' || $template == 'product' || $template == 'cart'): ?>
   <a href="<?php echo $shop->url() ?>">
-  <h1 id="shop-link-l"<?php e($shop->isOpen(), ' class="active"') ?>><?= $shop->title()->html() ?></h1>
+  <h1 id="shop-link-l"<?php e($template == 'shop' || $template == 'products' || $template == 'product' || $template == 'cart', ' class="active"') ?>><?= $shop->title()->html() ?></h1>
   </a>
   <?php endif ?>
   <ul>

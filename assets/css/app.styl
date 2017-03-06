@@ -59,6 +59,7 @@ img.lazyimg.flickity-lazyloaded
 
 button, .btn
 	cursor pointer
+	padding .3em
 
 button:disabled
 	cursor not-allowed
@@ -182,7 +183,16 @@ a, a:hover, a:visited, a:focus
 		display none
 	li
 		text-transform lowercase
-	h1:hover::after, h1.active::after
+	h1:hover::after
+		+above($md + 1)
+			content ''
+			width 100%
+			height .08em
+			position absolute
+			bottom -1vh
+			left 0
+			background $primary
+	h1.active::after
 		content ''
 		width 100%
 		height .08em
@@ -225,6 +235,8 @@ a, a:hover, a:visited, a:focus
 
 .slider
 	height 92vh
+	+below($md)
+		height 93vh
 	img
 		display block
 	.flickity-viewport
@@ -247,6 +259,10 @@ a, a:hover, a:visited, a:focus
 	+above($md + 1)
 		span(1/2)
 		padding-right none
+
+.inner.page.cart
+	+above($md + 1)
+		span(1)
 
 .inner.product
 	.col
@@ -342,17 +358,18 @@ body.shop
 							cursor pointer
 							span(1)
 							height 100%
+							//border .1em solid
+							//border-right none
 							border none
-							border .1em solid
-							border-right none
 							text-align center
 						button:nth-of-type(2)
-							display none
+							+above($md + 1)
+								display none
 			.content-item:last-child
 				.item-caption
 					.flex
 						button
-							border-right .1em solid
+							//border-right .1em solid
 			.content-item:nth-child(3n+1)
 				.item-caption
 					.flex
@@ -367,9 +384,11 @@ body.shop
 				.item-caption
 					.flex
 						button:nth-of-type(1)
-							display none
+							+above($md + 1)
+								display none
 						button:nth-of-type(2)
-							display block
+							+above($md + 1)
+								display block
 	.slider
 		height 100vh
 		//padding-top 13vh
@@ -405,7 +424,8 @@ body.shop
 		width 4vh
 		display inline-block
 		text-align center
-		padding-bottom .5vh
+		padding 0
+		//padding-bottom .5vh
 	table
 		width 100%
 	td, th

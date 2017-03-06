@@ -56,7 +56,7 @@ $(function() {
             flkty = $slider.data('flickity');
             $caption = $('#slide-caption');
             if (flkty) {
-                nbCells = flkty.cells.length;
+                nbCells = pad(flkty.cells.length);
             }
             $slider.on('select.flickity', function() {
                 if (flkty) {

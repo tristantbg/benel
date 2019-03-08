@@ -1,7 +1,7 @@
 /* globals $:false */
 var width = $(window).width(),
     height = $(window).height(),
-    isMobile = false,
+    isMobile = null,
     $root = '/';
 $(function() {
     var app = {
@@ -28,13 +28,13 @@ $(function() {
         sizeSet: function() {
             width = $(window).width();
             height = $(window).height();
-            if (width <= 770 || Modernizr.touch) isMobile = true;
-            if (isMobile) {
-                if (width >= 770) {
-                    //location.reload();
-                    isMobile = false;
-                }
+            if (isMobile !== null && isMobile && width > 1023) {
+              location.reload();
             }
+            if (isMobile !== null && !isMobile && width <= 1023) {
+              location.reload();
+            }
+            isMobile = width <= 1023;
         },
         loadSlider: function() {
             //var wrap = ($body.hasClass('shop') ? false : true);

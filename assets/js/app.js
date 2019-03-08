@@ -6,7 +6,9 @@ var width = $(window).width(),
 $(function() {
     var app = {
         init: function() {
-            $(window).resize(function(event) {});
+            $(window).resize(function(event) {
+                app.sizeSet();
+            });
             $(document).ready(function($) {
                 $body = $('body');
                 app.sizeSet();
@@ -36,6 +38,22 @@ $(function() {
         },
         loadSlider: function() {
             //var wrap = ($body.hasClass('shop') ? false : true);
+            if (isMobile) {
+                // $('.video-item').remove();
+                var $captions = $('[data-caption]');
+                $captions.each(function(index, el) {
+                  var c = el.dataset.caption;
+                  $(el).append('<div id="slide-caption">'+pad(index+1)+'/'+pad($captions.length)+'   '+c+'</div>');
+                });
+            } else {
+                var videos = document.getElementsByTagName('video');
+                for (var i = videos.length - 1; i >= 0; i--) {
+                    videos[i].addEventListener('loadeddata', function() {
+                        $slider.flickity('resize');
+                    }, false);
+                }
+            }
+            if (isMobile) return;
             $slider = $('.slider').flickity({
                 cellSelector: '.content-item',
                 imagesLoaded: false,
@@ -69,16 +87,7 @@ $(function() {
                     });
                 }
             });
-            if (isMobile) {
-                $('.video-item').remove();
-            } else {
-                var videos = document.getElementsByTagName('video');
-                for (var i = videos.length - 1; i >= 0; i--) {
-                    videos[i].addEventListener('loadeddata', function() {
-                        $slider.flickity('resize');
-                    }, false);
-                }
-            }
+            
             $slider.on('staticClick.flickity', function(event, pointer, cellElement, cellIndex) {
                 if (!cellElement || $body.hasClass('shop')) {
                     return;

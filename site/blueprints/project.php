@@ -4,6 +4,9 @@ title: Project
 files: true
 pages: false
 files:
+  size: 12000000
+  width: 6000
+  height: 6000
   sortable: true
   fields:
     caption:
@@ -35,6 +38,7 @@ fields:
     types:
       - image
       - video
+      - document
   text:
     label: Description
     type: textarea

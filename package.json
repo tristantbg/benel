@@ -5,12 +5,12 @@
   "devDependencies": {
     "grunt": "*",
     "grunt-contrib-concat": "*",
-    "grunt-contrib-stylus": "*",
     "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-stylus": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
     "grunt-php": "*",
-    "jeet": "*",
+    "jeet": "6.1.2",
     "rupture": "*"
   },
   "dependencies": {

@@ -36,13 +36,13 @@ body
 	font-family 'NM', 'Helvetica', 'Arial', sans-serif
 	font-size 3vh
 	+below($md)
-		font-size 2vh
+		font-size 4vw
 
 h1
 	text-transform uppercase
 	font-size 5vh
 	+below($md)
-		font-size 3vh
+		font-size 7vw
 
 p
 	margin-bottom 1em
@@ -54,8 +54,9 @@ p:last-child
 img.lazyimg
 	transition(opacity 300ms ease)
 	opacity 0
-img.lazyimg.flickity-lazyloaded
-	opacity 1
+img.lazyimg
+	&.flickity-lazyloaded, &.lazyloaded
+		opacity 1
 
 button, .btn
 	cursor pointer
@@ -222,6 +223,8 @@ a, a:hover, a:visited, a:focus
 	background $primary
 
 .inner.project
+	+below($md)
+		span(1)
 	#slide-caption
 		position fixed
 		bottom ($padding/2)
@@ -230,22 +233,39 @@ a, a:hover, a:visited, a:focus
 		font-size 4vh
 		+below($md)
 			font-size 2vh
+			position static
+			span(1)
+			padding ($padding/2) $padding
+			background $primary
 		p
 			display inline
 
 .slider
 	height 92vh
 	+below($md)
-		height 93vh
+		span(1)
+		height auto
 	img
 		display block
 	.flickity-viewport
 		height 100%
 	.content-item
 		height 100%
+		+below($md)
+			height auto
+			span(1)
+			img, video
+				width 100%
+				height auto
 	.video-item
 		+below($md)
 			display none
+	.text-item
+		width 90vh
+		+below($md)
+			width auto
+		div
+			padding $padding
 
 .inner.home
 	height 100vh
@@ -293,7 +313,7 @@ a, a:hover, a:visited, a:focus
 		.meta.cf
 			font-size 5vh
 			+below($md)
-				font-size 3vh
+				font-size 7vw
 			li
 				display inline-block
 			li:first-child
@@ -441,10 +461,11 @@ body.shop
 		margin-top 1em
 		text-align right
 		+below($md)
-			font-size 3vh
+			font-size 7vw
 	button
 		border .08em solid $secondary
 		background transparent
 
 body.project
-	overflow hidden
+	+above($md + 1)
+		overflow hidden

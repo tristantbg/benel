@@ -22,6 +22,7 @@ $files = call_user_func_array(array($page->files(), 'find'), $filenames);
 						<div class="content-item image-item" data-caption="<?= $file->caption()->kt()->escape() ?>">
 								<img 
 								src="<?= resizeOnDemand($file, 100) ?>" 
+								data-src="<?= resizeOnDemand($file, 1000, true) ?>" 
 								data-flickity-lazyload="<?= resizeOnDemand($file, 1000, true) ?>" 
 								class="lazyimg lazyload" 
 								alt="<?= $title.' — © '.$page->date("Y").', '.$site->title()->html(); ?>" 
@@ -36,6 +37,10 @@ $files = call_user_func_array(array($page->files(), 'find'), $filenames);
 							  <source src="<?= $file->url() ?>" type="video/mp4">
 							  Your browser does not support the video tag.
 							</video>
+						</div>
+					<?php elseif($file->extension() == "text"): ?>
+						<div class="content-item text-item title" data-caption="<?= $file->caption()->kt()->escape() ?>">
+							<div><?= kirbytext(file_get_contents($file->root())) ?></div>
 						</div>
 					<?php endif ?>
 
